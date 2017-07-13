@@ -82,7 +82,7 @@ void EventLoop::loop()
     for (ChannelList::iterator it = activeChannels_.begin();
         it != activeChannels_.end(); ++it)//遍历活动通道进行处理
     {
-      currentActiveChannel_ = *it;more
+      currentActiveChannel_ = *it;
       currentActiveChannel_->handleEvent(pollReturnTime_);//处理通道
     }
     currentActiveChannel_ = NULL;

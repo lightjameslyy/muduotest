@@ -75,11 +75,11 @@ class EventLoop : boost::noncopyable
   
   bool looping_; /* atomic *///是否处于循环状态
   bool quit_; /* atomic *///是否退出loop
-  bool eventHandling_; /* atomic *///是否正在处理事件状态
+  bool eventHandling_; /* atomic *///是否处于正在处理事件的状态
   const pid_t threadId_;		// 当前对象所属线程ID
-  Timestamp pollReturnTime_;//调用poll所返回的时间戳
-  boost::scoped_ptr<Poller> poller_;//不需要delete
-  ChannelList activeChannels_;		// Poller返回的活动通道
+  Timestamp pollReturnTime_;//调用poll函数所返回的时间戳
+  boost::scoped_ptr<Poller> poller_;//不需要delete，智能指针，生存期由eventloop控制
+  ChannelList activeChannels_;		// Poller返回的活动通道（产生事件的通道）
   Channel* currentActiveChannel_;	// 当前正在处理的活动通道
 };
 
