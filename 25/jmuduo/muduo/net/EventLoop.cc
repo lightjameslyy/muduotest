@@ -1,4 +1,4 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
+﻿// Copyright 2010, Shuo Chen.  All rights reserved.
 // http://code.google.com/p/muduo/
 //
 // Use of this source code is governed by a BSD-style license
@@ -17,7 +17,7 @@ using namespace muduo::net;
 
 namespace
 {
-// 当前线程EventLoop对象指针
+// 当前线程存储的EventLoop对象指针
 // 线程局部存储
 __thread EventLoop* t_loopInThisThread = 0;
 }
