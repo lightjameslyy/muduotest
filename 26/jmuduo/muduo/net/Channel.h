@@ -37,7 +37,7 @@ class Channel : boost::noncopyable
   typedef boost::function<void()> EventCallback;
   typedef boost::function<void(Timestamp)> ReadEventCallback;//读事件的回调处理，需要多长的时间戳
 
-  Channel(EventLoop* loop, int fd);//只能在一个eventlooop
+  Channel(EventLoop* loop, int fd);//只能在一个eventlooop,由一个eventloop负责
   ~Channel();
 
   void handleEvent(Timestamp receiveTime);
@@ -55,7 +55,7 @@ class Channel : boost::noncopyable
   /// prevent the owner object being destroyed in handleEvent.
   void tie(const boost::shared_ptr<void>&);
 
-  int fd() const { return fd_; }
+  int fd() const { return fd_; }//channel对应的文件描述符
   int events() const { return events_; }//channel注册的事件保存在events_
   void set_revents(int revt) { revents_ = revt; } // used by pollers
   // int revents() const { return revents_; }

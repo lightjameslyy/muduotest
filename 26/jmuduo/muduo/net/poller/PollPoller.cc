@@ -52,7 +52,7 @@ void PollPoller::fillActiveChannels(int numEvents,
                                     ChannelList* activeChannels) const
 {
   for (PollFdList::const_iterator pfd = pollfds_.begin();
-      pfd != pollfds_.end() && numEvents > 0; ++pfd)
+      pfd != pollfds_.end() && numEvents > 0; ++pfd)//pollfds_是输入输出参数
   {
     if (pfd->revents > 0)//事件的个数
     {
@@ -102,7 +102,7 @@ void PollPoller::updateChannel(Channel* channel)
     {
       // ignore this pollfd
 	  // 暂时忽略该文件描述符的事件
-	  // 这里pfd.fd 可以直接设置为-1(但-1不是一个合法的文件描述符，为什么还要-1，因为有0的文件描述符)
+	  // 这里pfd.fd 可以直接设置为-1(-1就是一个合法的文件描述符，为什么还要减1，因为有0的文件描述符的存在，不然的话-0还是0)
       pfd.fd = -channel->fd()-1;	// 这样子设置是为了removeChannel优化
     }
   }
