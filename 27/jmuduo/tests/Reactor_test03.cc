@@ -17,7 +17,8 @@ void timeout(Timestamp receiveTime)
 	printf("Timeout!\n");
 	uint64_t howmany;
 	::read(timerfd, &howmany, sizeof howmany);//把数据读走，不然会一直触发（poll这里电平触发）
-	//g_loop->quit();
+	printf("read form timerfd is %ld\n",howmany);
+	//g_loop->quit();//这里在IO线程中调用，不过可以跨线程调用
 }
 
 int main(void)

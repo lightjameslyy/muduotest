@@ -98,9 +98,11 @@ void EventLoop::loop()
 void EventLoop::quit()
 {
   quit_ = true;
-  if (!isInLoopThread())
+  if (!isInLoopThread())//如果不是在IO线程中调用qiit()的话，IO线程还在handleevent()状态，可能不会马上处理完毕，甚至阻塞在poll(),
+						//的位置，则此时需要唤醒IO线程，否则quit_等于true了，Io线程也暂时无法运行到while(!quit_)处；
+						//多个线程可能会用到quit_也无需保护，因为bool类型是原子性操作
   {
-    //wakeup();
+    //wakeup();//唤醒通道;用eventfd系统调用；
   }
 }
 
