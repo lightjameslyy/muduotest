@@ -9,7 +9,7 @@
 using namespace muduo;
 using namespace muduo::net;
 
-EventLoop* g_loop;
+EventLoop* g_loop;//全局的指针指向对象
 int timerfd;
 
 void timeout(Timestamp receiveTime)
@@ -31,15 +31,12 @@ int main(void)
 													  //_1pollreturn回来的时间，传递到timeout函数当中
 	channel.enableReading();//关注它的可读事件，这个时候poll或者epoll关注这个定时器的可读事件
 
-	struct itimerspec howlong;//定时器的超时时间
+	struct itimerspec howlong;//设定定时器的超时时间
 	bzero(&howlong, sizeof howlong);//一次性定时器
 	howlong.it_value.tv_sec = 1;
 	::timerfd_settime(timerfd, 0, &howlong, NULL);
 
-	loop.loop();//一旦产生可读事件（定时器超时了），调用timeout
+	loop.loop();//处于事件循环状态，一旦产生可读事件（定时器超时了），调用timeout
 
 	::close(timerfd);
 }
-
-
-
