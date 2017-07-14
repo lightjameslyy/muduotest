@@ -16,7 +16,7 @@ void timeout(Timestamp receiveTime)
 {
 	printf("Timeout!\n");
 	uint64_t howmany;
-	::read(timerfd, &howmany, sizeof howmany);//把数据读走，不然会一直触发（epoll这里点评触发）
+	::read(timerfd, &howmany, sizeof howmany);//把数据读走，不然会一直触发（poll这里电平触发）
 	g_loop->quit();
 }
 
