@@ -50,7 +50,7 @@ class Timer : boost::noncopyable
 
  private:
   const TimerCallback callback_;		// 定时器回调函数
-  Timestamp expiration_;				// 下一次的超时时刻，当超时回调函数被调用
+  Timestamp expiration_;				// 下一次的超时时刻，当超时定时器回调函数被调用
   const double interval_;				// 超时时间间隔，如果是一次性定时器，该值为0
   const bool repeat_;					// 是否重复
   const int64_t sequence_;				// 定时器序号，每个定时器唯一编号

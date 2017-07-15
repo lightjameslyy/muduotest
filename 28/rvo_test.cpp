@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 using namespace std;
 
@@ -12,8 +12,9 @@ struct Foo
 
 Foo make_foo()   
 {   
-	Foo f;
-	return f;
+	Foo f;//构造函数
+	return f;//如果没有rvo优化的话，这里返回要调用拷贝构造函数，rvo优化直接把该对象返回回去，相当于这个对象被提升了
+				//提升成不是一个局部对象，vs debug底下没有rvo优化,release就有rvo优化
 	//return Foo();  
 }
   

@@ -1,4 +1,4 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
+﻿// Copyright 2010, Shuo Chen.  All rights reserved.
 // http://code.google.com/p/muduo/
 //
 // Use of this source code is governed by a BSD-style license
@@ -37,7 +37,7 @@ class TimerId;
 class TimerQueue : boost::noncopyable
 {
  public:
-  TimerQueue(EventLoop* loop);//属于一个eventloop，
+  TimerQueue(EventLoop* loop);//属于一个eventloop，在某个IO线程创建的
   ~TimerQueue();
 
   ///
