@@ -49,7 +49,7 @@ int main()
     loop.runAfter(3.5, boost::bind(print, "once3.5"));
     TimerId t45 = loop.runAfter(4.5, boost::bind(print, "once4.5"));
     loop.runAfter(4.2, boost::bind(cancel, t45));
-    loop.runAfter(4.8, boost::bind(cancel, t45));
+    loop.runAfter(4.8, boost::bind(cancel, t45));//没有效果
     loop.runEvery(2, boost::bind(print, "every2"));
     TimerId t3 = loop.runEvery(3, boost::bind(print, "every3"));
     loop.runAfter(9.001, boost::bind(cancel, t3));
