@@ -63,7 +63,7 @@ class TimerQueue : boost::noncopyable
   typedef std::pair<Timer*, int64_t> ActiveTimer;
   typedef std::set<ActiveTimer> ActiveTimerSet;//两个集合保存相同的东西，一个按时间戳排序，一个按地址排序；
 
-  // 以下成员函数只可能在其所属的I/O线程中调用，因而不必加锁。
+  // 以下成员函数只可能在其所属的I/O线程中调用，因而不必加锁
   // 服务器性能杀手之一是锁竞争，所以要尽可能少用锁
   void addTimerInLoop(Timer* timer);
   void cancelInLoop(TimerId timerId);
