@@ -1,0 +1,17 @@
+﻿main(): pid = 4027, flag = 0
+20170716 14:07:57.305916Z  4027 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170716 14:07:57.307500Z  4027 TRACE EventLoop EventLoop created 0x7FFFA62780C0 in thread 4027 - EventLoop.cc:62
+20170716 14:07:57.308471Z  4027 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+20170716 14:07:57.309656Z  4027 TRACE loop EventLoop 0x7FFFA62780C0 start looping - EventLoop.cc:94
+20170716 14:07:59.310438Z  4027 TRACE poll 1 events happended - EPollPoller.cc:65
+20170716 14:07:59.310827Z  4027 TRACE printActiveChannels {4: IN }  - EventLoop.cc:257
+20170716 14:07:59.310870Z  4027 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500214079.310858 - TimerQueue.cc:62
+run1(): pid = 4027, flag = 1
+run2(): pid = 4027, flag = 1
+run3(): pid = 4027, flag = 2
+20170716 14:08:02.311555Z  4027 TRACE poll 1 events happended - EPollPoller.cc:65
+20170716 14:08:02.311655Z  4027 TRACE printActiveChannels {4: IN }  - EventLoop.cc:257
+20170716 14:08:02.311679Z  4027 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500214082.311671 - TimerQueue.cc:62
+run4(): pid = 4027, flag = 3
+20170716 14:08:02.311718Z  4027 TRACE loop EventLoop 0x7FFFA62780C0 stop looping - EventLoop.cc:119
+main(): pid = 4027, flag = 3

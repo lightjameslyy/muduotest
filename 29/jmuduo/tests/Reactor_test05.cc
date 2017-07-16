@@ -1,4 +1,4 @@
-#include <muduo/net/EventLoop.h>
+﻿#include <muduo/net/EventLoop.h>
 //#include <muduo/net/EventLoopThread.h>
 //#include <muduo/base/Thread.h>
 
@@ -33,7 +33,7 @@ void run1()
 {
   g_flag = 1;
   printf("run1(): pid = %d, flag = %d\n", getpid(), g_flag);
-  g_loop->runInLoop(run2);
+  g_loop->runInLoop(run2);//在io线程中，直接执行，没有放到队列
   g_flag = 2;
 }
 
