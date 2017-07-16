@@ -1,0 +1,93 @@
+pid = 3050, tid = 3050
+now 1500136442.862415
+20170715 16:34:03.863893Z  3050 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170715 16:34:03.864426Z  3050 TRACE EventLoop EventLoop created 0xBFEB52A4 in thread 3050 - EventLoop.cc:44
+msg 1500136443.864740 main
+20170715 16:34:03.865055Z  3050 TRACE loop EventLoop 0xBFEB52A4 start looping - EventLoop.cc:70
+20170715 16:34:04.865848Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:04.866238Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:04.866258Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136444.866252 - TimerQueue.cc:62
+msg 1500136444.866322 once1
+20170715 16:34:05.365806Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:05.370988Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:05.371035Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136445.371029 - TimerQueue.cc:62
+msg 1500136445.371056 once1.5
+20170715 16:34:05.866014Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:05.866123Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:05.866144Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136445.866138 - TimerQueue.cc:62
+msg 1500136445.866165 every2
+20170715 16:34:06.366106Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:06.366377Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:06.366404Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136446.366397 - TimerQueue.cc:62
+msg 1500136446.366425 once2.5
+20170715 16:34:06.866152Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:06.866222Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:06.866244Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136446.866238 - TimerQueue.cc:62
+msg 1500136446.866265 every3
+20170715 16:34:07.366044Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:07.366121Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:07.366142Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136447.366136 - TimerQueue.cc:62
+msg 1500136447.366164 once3.5
+20170715 16:34:07.867151Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:07.867228Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:07.867249Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136447.867243 - TimerQueue.cc:62
+msg 1500136447.867513 every2
+20170715 16:34:08.066013Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:08.066089Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:08.066110Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136448.066104 - TimerQueue.cc:62
+cancelled at 1500136448.066134
+20170715 16:34:08.666103Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:08.666176Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:08.666196Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136448.666191 - TimerQueue.cc:62
+cancelled at 1500136448.666220
+20170715 16:34:09.867329Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:09.867450Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:09.867471Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136449.867465 - TimerQueue.cc:62
+msg 1500136449.867494 every3
+msg 1500136449.867507 every2
+20170715 16:34:11.868481Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:11.868614Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:11.868636Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136451.868630 - TimerQueue.cc:62
+msg 1500136451.868657 every2
+20170715 16:34:12.866681Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:12.866754Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:12.866774Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136452.866769 - TimerQueue.cc:62
+cancelled at 1500136452.866797
+20170715 16:34:13.869773Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:13.870116Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:13.870155Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136453.870148 - TimerQueue.cc:62
+msg 1500136453.870175 every2
+20170715 16:34:15.870722Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:15.870790Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:15.870809Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136455.870802 - TimerQueue.cc:62
+msg 1500136455.870827 every2
+20170715 16:34:17.870924Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:17.871189Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:17.871204Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136457.871199 - TimerQueue.cc:62
+msg 1500136457.871218 every2
+20170715 16:34:19.872189Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:19.872320Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:19.872342Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136459.872336 - TimerQueue.cc:62
+msg 1500136459.872362 every2
+20170715 16:34:21.872447Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:21.872742Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:21.872766Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136461.872760 - TimerQueue.cc:62
+msg 1500136461.872785 every2
+20170715 16:34:23.873524Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:23.873646Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:23.873667Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136463.873661 - TimerQueue.cc:62
+msg 1500136463.873688 every2
+20170715 16:34:25.874686Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:25.874749Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:25.874761Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136465.874756 - TimerQueue.cc:62
+msg 1500136465.874774 every2
+20170715 16:34:27.874955Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:27.875050Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:27.875063Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136467.875057 - TimerQueue.cc:62
+msg 1500136467.875076 every2
+20170715 16:34:29.876187Z  3050 TRACE poll 1 events happended - EPollPoller.cc:65
+20170715 16:34:29.876538Z  3050 TRACE printActiveChannels {4: IN }  - EventLoop.cc:163
+20170715 16:34:29.876560Z  3050 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500136469.876554 - TimerQueue.cc:62
+msg 1500136469.876580 every2
+20170715 16:34:29.876637Z  3050 TRACE loop EventLoop 0xBFEB52A4 stop looping - EventLoop.cc:95
+msg 1500136469.876654 main loop exits
