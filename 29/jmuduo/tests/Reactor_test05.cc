@@ -26,7 +26,7 @@ void run3()
 void run2()
 {
   printf("run2(): pid = %d, flag = %d\n", getpid(), g_flag);
-  g_loop->queueInLoop(run3);
+  g_loop->queueInLoop(run3);//放到队列等待执行，run1
 }
 
 void run1()
