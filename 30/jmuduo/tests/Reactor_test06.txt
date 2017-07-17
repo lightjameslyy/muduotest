@@ -1,0 +1,21 @@
+main(): pid = 4135, tid = 4135
+startloop
+startloop while
+20170717 13:45:18.313608Z  4136 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170717 13:45:18.314442Z  4136 TRACE EventLoop EventLoop created 0xB73F5F64 in thread 4136 - EventLoop.cc:62
+20170717 13:45:18.314796Z  4136 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+threadfunc
+20170717 13:45:19.316359Z  4136 TRACE loop EventLoop 0xB73F5F64 start looping - EventLoop.cc:94
+20170717 13:45:19.316752Z  4136 TRACE poll 1 events happended - EPollPoller.cc:65
+20170717 13:45:19.317600Z  4136 TRACE printActiveChannels {5: IN }  - EventLoop.cc:257
+runInThread(): pid = 4135, tid = 4136
+20170717 13:45:20.317061Z  4136 TRACE poll 1 events happended - EPollPoller.cc:65
+20170717 13:45:20.317495Z  4136 TRACE printActiveChannels {5: IN }  - EventLoop.cc:257
+20170717 13:45:22.318316Z  4136 TRACE poll 1 events happended - EPollPoller.cc:65
+20170717 13:45:22.318760Z  4136 TRACE printActiveChannels {4: IN }  - EventLoop.cc:257
+20170717 13:45:22.334688Z  4136 TRACE readTimerfd TimerQueue::handleRead() 1 at 1500299122.334667 - TimerQueue.cc:62
+runInThread(): pid = 4135, tid = 4136
+exit main().
+20170717 13:45:23.319223Z  4136 TRACE poll 1 events happended - EPollPoller.cc:65
+20170717 13:45:23.319312Z  4136 TRACE printActiveChannels {5: IN }  - EventLoop.cc:257
+20170717 13:45:23.319331Z  4136 TRACE loop EventLoop 0xB73F5F64 stop looping - EventLoop.cc:119

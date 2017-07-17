@@ -120,10 +120,10 @@ TimerId TimerQueue::addTimer(const TimerCallback& cb,
 {
   Timer* timer = new Timer(cb, when, interval);
 
-  loop_->runInLoop(
+  loop_->runInLoop(//因为这个，所以addTimer()线程安全
       boost::bind(&TimerQueue::addTimerInLoop, this, timer));
 	  
-  //addTimerInLoop(timer);
+  //addTimerInLoop(timer);//如果这个就会出错，因为导致线程不安全
   return TimerId(timer, timer->sequence());
 }
 

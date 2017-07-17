@@ -1,4 +1,4 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
+﻿// Copyright 2010, Shuo Chen.  All rights reserved.
 // http://code.google.com/p/muduo/
 //
 // Use of this source code is governed by a BSD-style license
@@ -11,6 +11,7 @@
 #include <muduo/net/EventLoop.h>
 
 #include <boost/bind.hpp>
+#include <stdio.h>
 
 using namespace muduo;
 using namespace muduo::net;
@@ -40,8 +41,10 @@ EventLoop* EventLoopThread::startLoop()
 
   {
     MutexLockGuard lock(mutex_);
+	printf("startloop\n");
     while (loop_ == NULL)
     {
+	  printf("startloop while\n");
       cond_.wait();
     }
   }
@@ -49,17 +52,20 @@ EventLoop* EventLoopThread::startLoop()
   return loop_;
 }
 
-void EventLoopThread::threadFunc()
+void EventLoopThread::threadFunc()//上面的thread_.start()执行到这里,这里已经是另外一个线程了
 {
   EventLoop loop;
 
   if (callback_)
   {
     callback_(&loop);//回调函数
+	printf("callback_()\n");
   }
 
   {
     MutexLockGuard lock(mutex_);
+	sleep(1);
+	printf("threadfunc\n");
     // loop_指针指向了一个栈上的对象，threadFunc函数退出之后，这个指针就失效了
     // threadFunc函数退出，就意味着线程退出了，EventLoopThread对象也就没有存在的价值了。
     // 因而不会有什么大的问题
