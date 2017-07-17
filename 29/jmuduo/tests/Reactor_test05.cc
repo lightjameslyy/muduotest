@@ -26,7 +26,8 @@ void run3()
 void run2()
 {
   printf("run2(): pid = %d, flag = %d\n", getpid(), g_flag);
-  g_loop->queueInLoop(run3);//放到队列等待执行，run1
+  g_loop->queueInLoop(run3);//放到队列等待执行，run1()执行完毕(currentActiveChannel_->handleEvent(pollReturnTime_);)，
+							//eventloop::loop()中执行到doPendingFunctors();会执行run3()
 }
 
 void run1()
