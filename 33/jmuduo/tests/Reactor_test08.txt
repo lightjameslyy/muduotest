@@ -1,0 +1,25 @@
+服务端：
+[ccc@ubuntu ~/muduotest/33/build/debug/bin]$>./reactor_test08
+main(): pid = 9025
+20170718 17:07:14.057052Z  9025 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170718 17:07:14.057473Z  9025 TRACE EventLoop EventLoop created 0xBFEA46EC in thread 9025 - EventLoop.cc:62
+20170718 17:07:14.058127Z  9025 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+20170718 17:07:14.058518Z  9025 TRACE updateChannel fd = 6 events = 3 - EPollPoller.cc:104
+20170718 17:07:14.059171Z  9025 TRACE loop EventLoop 0xBFEA46EC start looping - EventLoop.cc:94
+20170718 17:07:17.814790Z  9025 TRACE poll 1 events happended - EPollPoller.cc:65
+20170718 17:07:17.832678Z  9025 TRACE printActiveChannels {6: IN }  - EventLoop.cc:257
+20170718 17:07:17.834644Z  9025 INFO  TcpServer::newConnection [TestServer] - new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47298 - TcpServer.cc:74
+20170718 17:07:17.835810Z  9025 DEBUG TcpConnection TcpConnection::ctor[TestServer:0.0.0.0:8888#1] at 0x9CE8430 fd=8 - TcpConnection.cc:56
+20170718 17:07:17.836352Z  9025 TRACE updateChannel fd = 8 events = 3 - EPollPoller.cc:104
+onConnection(): new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47298
+20170718 17:07:26.636547Z  9025 TRACE poll 1 events happended - EPollPoller.cc:65
+20170718 17:07:26.636753Z  9025 TRACE printActiveChannels {8: IN }  - EventLoop.cc:257
+onMessage(): received 3 bytes from connection [TestServer:0.0.0.0:8888#1]
+
+客户端：
+[ccc@ubuntu ~]$>telnet 127.0.0.1 8888
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+a
+Connection closed by foreign host.
