@@ -1,0 +1,43 @@
+服务端：
+main(): pid = 10265
+20170718 18:56:35.855334Z 10265 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170718 18:56:35.855762Z 10265 TRACE EventLoop EventLoop created 0xBFC06328 in thread 10265 - EventLoop.cc:62
+20170718 18:56:35.855828Z 10265 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+20170718 18:56:35.856493Z 10265 TRACE updateChannel fd = 6 events = 3 - EPollPoller.cc:104
+20170718 18:56:35.856838Z 10265 TRACE loop EventLoop 0xBFC06328 start looping - EventLoop.cc:94
+20170718 18:56:39.084053Z 10265 TRACE poll 1 events happended - EPollPoller.cc:65
+20170718 18:56:39.085583Z 10265 TRACE printActiveChannels {6: IN }  - EventLoop.cc:257
+20170718 18:56:39.086414Z 10265 INFO  TcpServer::newConnection [TestServer] - new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47300 - TcpServer.cc:84
+20170718 18:56:39.086633Z 10265 DEBUG TcpConnection TcpConnection::ctor[TestServer:0.0.0.0:8888#1] at 0x903B430 fd=8 - TcpConnection.cc:62
+20170718 18:56:39.086696Z 10265 TRACE newConnection [1] usecount=1 - TcpServer.cc:96
+20170718 18:56:39.086754Z 10265 TRACE newConnection [2] usecount=2 - TcpServer.cc:98
+20170718 18:56:39.086808Z 10265 TRACE connectEstablished [3] usecount=3 - TcpConnection.cc:78
+20170718 18:56:39.086866Z 10265 TRACE updateChannel fd = 8 events = 3 - EPollPoller.cc:104
+onConnection(): new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47300
+20170718 18:56:39.087015Z 10265 TRACE connectEstablished [4] usecount=3 - TcpConnection.cc:83
+20170718 18:56:39.087066Z 10265 TRACE newConnection [5] usecount=2 - TcpServer.cc:106
+20170718 18:56:49.099034Z 10265 TRACE poll  nothing happended - EPollPoller.cc:74
+20170718 18:56:55.130324Z 10265 TRACE poll 1 events happended - EPollPoller.cc:65
+20170718 18:56:55.130804Z 10265 TRACE printActiveChannels {8: IN }  - EventLoop.cc:257
+20170718 18:56:55.131111Z 10265 TRACE handleEvent [6] usecount=2 - Channel.cc:67
+20170718 18:56:55.131955Z 10265 TRACE handleClose fd = 8 state = 2 - TcpConnection.cc:144
+20170718 18:56:55.132291Z 10265 TRACE updateChannel fd = 8 events = 0 - EPollPoller.cc:104
+onConnection(): connection [TestServer:0.0.0.0:8888#1] is down
+20170718 18:56:55.132488Z 10265 TRACE handleClose [7] usecount=3 - TcpConnection.cc:152
+20170718 18:56:55.132575Z 10265 INFO  TcpServer::removeConnectionInLoop [TestServer] - connection TestServer:0.0.0.0:8888#1 - TcpServer.cc:113
+20170718 18:56:55.132662Z 10265 TRACE removeConnection [8] usecount=3 - TcpServer.cc:117
+20170718 18:56:55.133056Z 10265 TRACE removeConnection [9] usecount=2 - TcpServer.cc:119
+20170718 18:56:55.133117Z 10265 TRACE removeConnection [10] usecount=3 - TcpServer.cc:126
+20170718 18:56:55.133164Z 10265 TRACE handleClose [11] usecount=3 - TcpConnection.cc:155
+20170718 18:56:55.134428Z 10265 TRACE handleEvent [12] usecount=2 - Channel.cc:69
+20170718 18:56:55.134450Z 10265 TRACE removeChannel fd = 8 - EPollPoller.cc:147
+20170718 18:56:55.134473Z 10265 DEBUG ~TcpConnection TcpConnection::dtor[TestServer:0.0.0.0:8888#1] at 0x903B430 fd=8 - TcpConnection.cc:69
+
+客户端：
+[ccc@ubuntu ~]$>Ctelnet 127.0.0.1 8888
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+^]
+telnet> quit
+Connection closed.

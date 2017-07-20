@@ -105,7 +105,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
   conn->connectEstablished();
   LOG_TRACE << "[5] usecount=" << conn.use_count();
 
-}
+}//由于这里coon是临时对象，跳出这个函数之后，use_count()就变成1了
 
 void TcpServer::removeConnection(const TcpConnectionPtr& conn)
 {
@@ -114,15 +114,15 @@ void TcpServer::removeConnection(const TcpConnectionPtr& conn)
            << "] - connection " << conn->name();
 
 
-  LOG_TRACE << "[8] usecount=" << conn.use_count();
+  LOG_TRACE << "[8] usecount=" << conn.use_count();//=3
   size_t n = connections_.erase(conn->name());
-  LOG_TRACE << "[9] usecount=" << conn.use_count();
+  LOG_TRACE << "[9] usecount=" << conn.use_count();//=2
 
   (void)n;
   assert(n == 1);
   
   loop_->queueInLoop(
       boost::bind(&TcpConnection::connectDestroyed, conn));
-  LOG_TRACE << "[10] usecount=" << conn.use_count();
+  LOG_TRACE << "[10] usecount=" << conn.use_count();//=3
 
 }

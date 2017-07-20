@@ -61,19 +61,19 @@ void Channel::handleEvent(Timestamp receiveTime)
   boost::shared_ptr<void> guard;
   if (tied_)
   {
-    guard = tie_.lock();
+    guard = tie_.lock();//提升为shared_ptr,引用计数+1等于2
     if (guard)
     {
-      LOG_TRACE << "[6] usecount=" << guard.use_count();
+      LOG_TRACE << "[6] usecount=" << guard.use_count();//2
       handleEventWithGuard(receiveTime);
-	  LOG_TRACE << "[12] usecount=" << guard.use_count();
+	  LOG_TRACE << "[12] usecount=" << guard.use_count();//2
     }
   }
   else
   {
     handleEventWithGuard(receiveTime);
   }
-}
+}//=1,调用完functors中的函数之后，引用计数再减1=0，对象就销毁了
 
 void Channel::handleEventWithGuard(Timestamp receiveTime)
 {

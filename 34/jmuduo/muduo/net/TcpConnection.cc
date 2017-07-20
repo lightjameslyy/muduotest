@@ -75,12 +75,12 @@ void TcpConnection::connectEstablished()
   loop_->assertInLoopThread();
   assert(state_ == kConnecting);
   setState(kConnected);
-  LOG_TRACE << "[3] usecount=" << shared_from_this().use_count();
-  channel_->tie(shared_from_this());
+  LOG_TRACE << "[3] usecount=" << shared_from_this().use_count();//引用计数+1，但是临时对象这句之后又变成2
+  channel_->tie(shared_from_this());//弱引用，还是为2(shared_from_this()为临时对象)
   channel_->enableReading();	// TcpConnection所对应的通道加入到Poller关注
 
-  connectionCallback_(shared_from_this());
-  LOG_TRACE << "[4] usecount=" << shared_from_this().use_count();
+  connectionCallback_(shared_from_this());//2->3->2
+  LOG_TRACE << "[4] usecount=" << shared_from_this().use_count();//2->3->3
 }
 
 void TcpConnection::connectDestroyed()
@@ -144,16 +144,16 @@ void TcpConnection::handleClose()
   LOG_TRACE << "fd = " << channel_->fd() << " state = " << state_;
   assert(state_ == kConnected || state_ == kDisconnecting);
   // we don't close fd, leave it to dtor, so we can find leaks easily.
-  setState(kDisconnected);
+  setState(kDisconnected);//若connectionCallback_(guardThis);没调用的话这句也忽略
   channel_->disableAll();
-
-  TcpConnectionPtr guardThis(shared_from_this());
+//下面这句不用TcpConnectionPtr guardThis(this);
+  TcpConnectionPtr guardThis(shared_from_this());//share_from_this()这个临时对象被一个变量接收了，引用计数+1=3
   connectionCallback_(guardThis);		// 这一行，可以不调用
-  LOG_TRACE << "[7] usecount=" << guardThis.use_count();
+  LOG_TRACE << "[7] usecount=" << guardThis.use_count();//=3
   // must be the last line
   closeCallback_(guardThis);	// 调用TcpServer::removeConnection
-  LOG_TRACE << "[11] usecount=" << guardThis.use_count();
-}
+  LOG_TRACE << "[11] usecount=" << guardThis.use_count();//=3
+}//guardThis是临时对象，引用计数又变成2
 
 void TcpConnection::handleError()
 {
