@@ -53,9 +53,9 @@ EventLoop::EventLoop()
     eventHandling_(false),
     callingPendingFunctors_(false),
     threadId_(CurrentThread::tid()),
-    poller_(Poller::newDefaultPoller(this)),
-    timerQueue_(new TimerQueue(this)),
-    wakeupFd_(createEventfd()),
+    poller_(Poller::newDefaultPoller(this)),//fd=3
+    timerQueue_(new TimerQueue(this)),//fd=4
+    wakeupFd_(createEventfd()),//fd=5
     wakeupChannel_(new Channel(this, wakeupFd_)),
     currentActiveChannel_(NULL)
 {

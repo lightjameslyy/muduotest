@@ -17,6 +17,7 @@ onConnection(): new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47300
 20170718 18:56:39.087015Z 10265 TRACE connectEstablished [4] usecount=3 - TcpConnection.cc:83
 20170718 18:56:39.087066Z 10265 TRACE newConnection [5] usecount=2 - TcpServer.cc:106
 20170718 18:56:49.099034Z 10265 TRACE poll  nothing happended - EPollPoller.cc:74
+//下面是关闭连接的过程
 20170718 18:56:55.130324Z 10265 TRACE poll 1 events happended - EPollPoller.cc:65
 20170718 18:56:55.130804Z 10265 TRACE printActiveChannels {8: IN }  - EventLoop.cc:257
 20170718 18:56:55.131111Z 10265 TRACE handleEvent [6] usecount=2 - Channel.cc:67
@@ -32,6 +33,7 @@ onConnection(): connection [TestServer:0.0.0.0:8888#1] is down
 20170718 18:56:55.134428Z 10265 TRACE handleEvent [12] usecount=2 - Channel.cc:69
 20170718 18:56:55.134450Z 10265 TRACE removeChannel fd = 8 - EPollPoller.cc:147
 20170718 18:56:55.134473Z 10265 DEBUG ~TcpConnection TcpConnection::dtor[TestServer:0.0.0.0:8888#1] at 0x903B430 fd=8 - TcpConnection.cc:69
+^C
 
 客户端：
 [ccc@ubuntu ~]$>Ctelnet 127.0.0.1 8888

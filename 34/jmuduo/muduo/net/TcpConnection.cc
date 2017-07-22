@@ -80,7 +80,7 @@ void TcpConnection::connectEstablished()
   channel_->enableReading();	// TcpConnection所对应的通道加入到Poller关注
 
   connectionCallback_(shared_from_this());//2->3->2
-  LOG_TRACE << "[4] usecount=" << shared_from_this().use_count();//2->3->3
+  LOG_TRACE << "[4] usecount=" << shared_from_this().use_count();//2->3->2
 }
 
 void TcpConnection::connectDestroyed()
@@ -94,7 +94,7 @@ void TcpConnection::connectDestroyed()
     connectionCallback_(shared_from_this());
   }
   channel_->remove();
-}
+}//退出这个函数，引用计数变成0，删除tcpconnection
 
 void TcpConnection::handleRead(Timestamp receiveTime)
 {
