@@ -17,6 +17,12 @@ onConnection(): new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47300
 20170718 18:56:39.087015Z 10265 TRACE connectEstablished [4] usecount=3 - TcpConnection.cc:83
 20170718 18:56:39.087066Z 10265 TRACE newConnection [5] usecount=2 - TcpServer.cc:106
 20170718 18:56:49.099034Z 10265 TRACE poll  nothing happended - EPollPoller.cc:74
+//下面是接收到数据的过程
+20170720 16:25:29.936626Z 12629 TRACE poll 1 events happended - EPollPoller.cc:65
+20170720 16:25:29.936687Z 12629 TRACE printActiveChannels {8: IN }  - EventLoop.cc:257
+20170720 16:25:29.936702Z 12629 TRACE handleEvent [6] usecount=2 - Channel.cc:67
+onMessage(): received 5 bytes from connection [TestServer:0.0.0.0:8888#1]
+20170720 16:25:29.936733Z 12629 TRACE handleEvent [12] usecount=2 - Channel.cc:69
 //下面是关闭连接的过程
 20170718 18:56:55.130324Z 10265 TRACE poll 1 events happended - EPollPoller.cc:65
 20170718 18:56:55.130804Z 10265 TRACE printActiveChannels {8: IN }  - EventLoop.cc:257
