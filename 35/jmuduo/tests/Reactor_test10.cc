@@ -13,7 +13,7 @@ class TestServer
 {
  public:
   TestServer(EventLoop* loop,
-             const InetAddress& listenAddr, int numThreads)
+             const InetAddress& listenAddr, int numThreads)//numThreads线程池中创建的线程个数
     : loop_(loop),
       server_(loop, listenAddr, "TestServer"),
       numThreads_(numThreads)
@@ -65,10 +65,10 @@ int main()
   printf("main(): pid = %d\n", getpid());
 
   InetAddress listenAddr(8888);
-  EventLoop loop;
+  EventLoop loop;//当前的主线程是io线程
 
-  TestServer server(&loop, listenAddr,4);//loop为主线程，线程池线程个数4
+  TestServer server(&loop, listenAddr,4);//loop为主线程，线程池线程个数4，总的io线程个数为5
   server.start();
 
-  loop.loop();
+  loop.loop();//内部还有4个io线程事件循环，总共5个io线程事件循环
 }

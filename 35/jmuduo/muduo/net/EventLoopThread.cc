@@ -33,7 +33,7 @@ EventLoopThread::~EventLoopThread()
   thread_.join();
 }
 
-EventLoop* EventLoopThread::startLoop()
+EventLoop* EventLoopThread::startLoop()//主线程
 {
   assert(!thread_.started());
   thread_.start();
@@ -49,7 +49,7 @@ EventLoop* EventLoopThread::startLoop()
   return loop_;
 }
 
-void EventLoopThread::threadFunc()
+void EventLoopThread::threadFunc()//子线程
 {
   EventLoop loop;
 

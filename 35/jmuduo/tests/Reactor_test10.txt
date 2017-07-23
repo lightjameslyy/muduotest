@@ -1,0 +1,127 @@
+//fd=3 pollerfd fd=4 timerfd fd=5 wakeupfd fd=6 acceptfd fd=7 idlefd
+main(): pid = 16204
+20170722 13:42:39.960217Z 16204 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.960400Z 16204 TRACE EventLoop EventLoop created 0xBFBB8EE0 in thread 16204 - EventLoop.cc:62
+20170722 13:42:39.961059Z 16204 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+//io线程池创建的四个io线程对应的eventloop对象
+//fd=8 这个新对象的pollerfd,fd=9 timerfd,fd=10 wakeupfd，8~19分属四个线程
+//每个子线程的事件循环loop.loop()先启动，父进程的最后启动
+20170722 13:42:39.961559Z 16205 TRACE updateChannel fd = 9 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.961645Z 16205 TRACE EventLoop EventLoop created 0xB7415F64 in thread 16205 - EventLoop.cc:62
+20170722 13:42:39.961708Z 16205 TRACE updateChannel fd = 10 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.961812Z 16205 TRACE loop EventLoop 0xB7415F64 start looping - EventLoop.cc:94
+20170722 13:42:39.961909Z 16206 TRACE updateChannel fd = 12 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.961981Z 16206 TRACE EventLoop EventLoop created 0xB6AFEF64 in thread 16206 - EventLoop.cc:62
+20170722 13:42:39.962038Z 16206 TRACE updateChannel fd = 13 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.962130Z 16206 TRACE loop EventLoop 0xB6AFEF64 start looping - EventLoop.cc:94
+20170722 13:42:39.962404Z 16207 TRACE updateChannel fd = 15 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.963033Z 16207 TRACE EventLoop EventLoop created 0xB60FEF64 in thread 16207 - EventLoop.cc:62
+20170722 13:42:39.963132Z 16207 TRACE updateChannel fd = 16 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.963239Z 16207 TRACE loop EventLoop 0xB60FEF64 start looping - EventLoop.cc:94
+20170722 13:42:39.963356Z 16208 TRACE updateChannel fd = 18 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.963436Z 16208 TRACE EventLoop EventLoop created 0xB58FDF64 in thread 16208 - EventLoop.cc:62
+20170722 13:42:39.963548Z 16208 TRACE updateChannel fd = 19 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.963636Z 16204 TRACE updateChannel fd = 6 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.963655Z 16204 TRACE loop EventLoop 0xBFBB8EE0 start looping - EventLoop.cc:94
+20170722 13:42:39.963693Z 16208 TRACE loop EventLoop 0xB58FDF64 start looping - EventLoop.cc:94
+
+20170722 13:42:49.971550Z 16205 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:42:49.971590Z 16206 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:42:49.971600Z 16204 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:42:49.971908Z 16207 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:42:49.972232Z 16208 TRACE poll  nothing happended - EPollPoller.cc:74
+//客户端第一个连接 fd=6主线程eventloop中的listenfd
+20170722 13:43:02.507615Z 16204 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:43:02.523824Z 16204 TRACE printActiveChannels {6: IN }  - EventLoop.cc:257
+20170722 13:43:02.524266Z 16204 INFO  TcpServer::newConnection [TestServer] - new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47385 - TcpServer.cc:93
+20170722 13:43:02.524365Z 16204 DEBUG TcpConnection TcpConnection::ctor[TestServer:0.0.0.0:8888#1] at 0x85FEE58 fd=20 - TcpConnection.cc:62
+20170722 13:43:02.524427Z 16204 TRACE newConnection [1] usecount=1 - TcpServer.cc:111
+20170722 13:43:02.524489Z 16204 TRACE newConnection [2] usecount=2 - TcpServer.cc:113
+
+//主线程和ioLoop所在的线程不一样，所以加入到ioLoop所属线程的待处理队列当中，wakeup ioLoop，让它处理
+20170722 13:43:02.524560Z 16205 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:43:02.524597Z 16205 TRACE printActiveChannels {10: IN }  - EventLoop.cc:257
+20170722 13:43:02.524621Z 16205 TRACE connectEstablished [3] usecount=7 - TcpConnection.cc:78
+//fd=20是主线程对应的acceptor接收连接的文件描述符，派发给subReactor处理
+20170722 13:43:02.524635Z 16205 TRACE updateChannel fd = 20 events = 3 - EPollPoller.cc:104
+onConnection(): new connection [TestServer:0.0.0.0:8888#1] from 127.0.0.1:47385//应用层的回调函数
+20170722 13:43:02.524668Z 16205 TRACE connectEstablished [4] usecount=7 - TcpConnection.cc:83
+20170722 13:43:02.524715Z 16204 TRACE newConnection [5] usecount=2 - TcpServer.cc:122
+
+20170722 13:43:09.993920Z 16206 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:43:09.993970Z 16207 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:43:09.993981Z 16208 TRACE poll  nothing happended - EPollPoller.cc:74
+
+20170722 13:43:12.536332Z 16205 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:43:12.536635Z 16204 TRACE poll  nothing happended - EPollPoller.cc:74
+//客户端第二个连接
+20170722 13:43:29.015851Z 16204 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:43:29.016214Z 16204 TRACE printActiveChannels {6: IN }  - EventLoop.cc:257
+20170722 13:43:29.016881Z 16204 INFO  TcpServer::newConnection [TestServer] - new connection [TestServer:0.0.0.0:8888#2] from 127.0.0.1:47386 - TcpServer.cc:93
+20170722 13:43:29.017061Z 16204 DEBUG TcpConnection TcpConnection::ctor[TestServer:0.0.0.0:8888#2] at 0x85FF060 fd=21 - TcpConnection.cc:62
+20170722 13:43:29.017081Z 16204 TRACE newConnection [1] usecount=1 - TcpServer.cc:111
+20170722 13:43:29.017104Z 16204 TRACE newConnection [2] usecount=2 - TcpServer.cc:113
+20170722 13:43:29.017132Z 16206 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:43:29.017159Z 16206 TRACE printActiveChannels {13: IN }  - EventLoop.cc:257
+20170722 13:43:29.017187Z 16206 TRACE connectEstablished [3] usecount=7 - TcpConnection.cc:78
+20170722 13:43:29.017199Z 16206 TRACE updateChannel fd = 21 events = 3 - EPollPoller.cc:104
+onConnection(): new connection [TestServer:0.0.0.0:8888#2] from 127.0.0.1:47386
+20170722 13:43:29.017501Z 16206 TRACE connectEstablished [4] usecount=7 - TcpConnection.cc:83
+20170722 13:43:29.017526Z 16204 TRACE newConnection [5] usecount=2 - TcpServer.cc:122
+
+20170722 13:43:30.014613Z 16207 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:43:30.014667Z 16208 TRACE poll  nothing happended - EPollPoller.cc:74
+
+20170722 13:43:32.558676Z 16205 TRACE poll  nothing happended - EPollPoller.cc:74
+
+20170722 13:43:39.029211Z 16206 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:43:39.029316Z 16204 TRACE poll  nothing happended - EPollPoller.cc:74
+//第一个客户端断开
+20170722 13:44:06.108751Z 16205 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:44:06.108820Z 16205 TRACE printActiveChannels {20: IN }  - EventLoop.cc:257
+20170722 13:44:06.108837Z 16205 TRACE handleEvent [6] usecount=2 - Channel.cc:67
+20170722 13:44:06.130004Z 16205 TRACE handleClose fd = 20 state = 2 - TcpConnection.cc:144
+20170722 13:44:06.130537Z 16205 TRACE updateChannel fd = 20 events = 0 - EPollPoller.cc:104// channel_->disableAll();
+onConnection(): connection [TestServer:0.0.0.0:8888#1] is down
+20170722 13:44:06.130663Z 16205 TRACE handleClose [7] usecount=3 - TcpConnection.cc:152
+20170722 13:44:06.130758Z 16204 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:44:06.130829Z 16204 TRACE printActiveChannels {5: IN }  - EventLoop.cc:257
+20170722 13:44:06.130848Z 16204 INFO  TcpServer::removeConnectionInLoop [TestServer] - connection TestServer:0.0.0.0:8888#1 - TcpServer.cc:153
+20170722 13:44:06.130859Z 16204 TRACE removeConnectionInLoop [8] usecount=7 - TcpServer.cc:157
+20170722 13:44:06.130880Z 16204 TRACE removeConnectionInLoop [9] usecount=6 - TcpServer.cc:159
+20170722 13:44:06.130905Z 16204 TRACE removeConnectionInLoop [10] usecount=7 - TcpServer.cc:170
+20170722 13:44:06.130959Z 16205 TRACE handleClose [11] usecount=3 - TcpConnection.cc:155
+20170722 13:44:06.131012Z 16205 TRACE handleEvent [12] usecount=2 - Channel.cc:69
+20170722 13:44:06.131871Z 16205 TRACE removeChannel fd = 20 - EPollPoller.cc:147
+20170722 13:44:06.131940Z 16205 DEBUG ~TcpConnection TcpConnection::dtor[TestServer:0.0.0.0:8888#1] at 0x85FEE58 fd=20 - TcpConnection.cc:69
+20170722 13:44:06.132109Z 16205 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:44:06.132189Z 16205 TRACE printActiveChannels {10: IN }  - EventLoop.cc:257
+
+20170722 13:44:09.063447Z 16206 TRACE poll  nothing happended - EPollPoller.cc:74
+
+20170722 13:44:10.059493Z 16207 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:44:10.059539Z 16208 TRACE poll  nothing happended - EPollPoller.cc:74
+
+20170722 13:44:16.142040Z 16204 TRACE poll  nothing happended - EPollPoller.cc:74
+20170722 13:44:16.142323Z 16205 TRACE poll  nothing happended - EPollPoller.cc:74
+//第二个客户端断开
+20170722 13:44:21.783545Z 16206 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:44:21.783604Z 16206 TRACE printActiveChannels {21: IN }  - EventLoop.cc:257
+20170722 13:44:21.783620Z 16206 TRACE handleEvent [6] usecount=2 - Channel.cc:67
+20170722 13:44:21.783645Z 16206 TRACE handleClose fd = 21 state = 2 - TcpConnection.cc:144
+20170722 13:44:21.783662Z 16206 TRACE updateChannel fd = 21 events = 0 - EPollPoller.cc:104
+onConnection(): connection [TestServer:0.0.0.0:8888#2] is down
+20170722 13:44:21.783690Z 16206 TRACE handleClose [7] usecount=3 - TcpConnection.cc:152
+20170722 13:44:21.783712Z 16206 TRACE handleClose [11] usecount=4 - TcpConnection.cc:155
+20170722 13:44:21.783737Z 16206 TRACE handleEvent [12] usecount=3 - Channel.cc:69
+20170722 13:44:21.783722Z 16204 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:44:21.783771Z 16204 TRACE printActiveChannels {5: IN }  - EventLoop.cc:257
+20170722 13:44:21.783786Z 16204 INFO  TcpServer::removeConnectionInLoop [TestServer] - connection TestServer:0.0.0.0:8888#2 - TcpServer.cc:153
+20170722 13:44:21.783796Z 16204 TRACE removeConnectionInLoop [8] usecount=2 - TcpServer.cc:157
+20170722 13:44:21.783808Z 16204 TRACE removeConnectionInLoop [9] usecount=1 - TcpServer.cc:159
+20170722 13:44:21.783825Z 16204 TRACE removeConnectionInLoop [10] usecount=2 - TcpServer.cc:170
+20170722 13:44:21.783840Z 16206 TRACE poll 1 events happended - EPollPoller.cc:65
+20170722 13:44:21.783856Z 16206 TRACE printActiveChannels {13: IN }  - EventLoop.cc:257
+20170722 13:44:21.783870Z 16206 TRACE removeChannel fd = 21 - EPollPoller.cc:147
+20170722 13:44:21.783884Z 16206 DEBUG ~TcpConnection TcpConnection::dtor[TestServer:0.0.0.0:8888#2] at 0x85FF060 fd=21 - TcpConnection.cc:69
+^C

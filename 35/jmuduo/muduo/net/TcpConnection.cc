@@ -72,6 +72,7 @@ TcpConnection::~TcpConnection()
 
 void TcpConnection::connectEstablished()
 {
+  //LOG_TRACE << "below will cause coredown";
   loop_->assertInLoopThread();
   assert(state_ == kConnecting);
   setState(kConnected);

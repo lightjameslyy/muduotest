@@ -102,7 +102,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
                                           localAddr,
                                           peerAddr));*/
 
-  TcpConnectionPtr conn(new TcpConnection(ioLoop,
+  TcpConnectionPtr conn(new TcpConnection(ioLoop,//用loop_是不正确的，和下面的ioLoop矛盾
                                           connName,
                                           sockfd,
                                           localAddr,
@@ -149,7 +149,7 @@ void TcpServer::removeConnection(const TcpConnectionPtr& conn)
 
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
 {
-  loop_->assertInLoopThread();
+  loop_->assertInLoopThread();//主线程
   LOG_INFO << "TcpServer::removeConnectionInLoop [" << name_
            << "] - connection " << conn->name();
 
@@ -162,7 +162,7 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
   assert(n == 1);
   
   EventLoop* ioLoop = conn->getLoop();
-  ioLoop->queueInLoop(
+  ioLoop->queueInLoop(//子线程
       boost::bind(&TcpConnection::connectDestroyed, conn));
 
   //loop_->queueInLoop(
