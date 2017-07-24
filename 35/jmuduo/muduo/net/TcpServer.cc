@@ -82,7 +82,7 @@ void TcpServer::start()
 
 void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
 {
-  loop_->assertInLoopThread();
+  loop_->assertInLoopThread();//在主线程当中
   // 按照轮叫的方式选择一个EventLoop（对应的线程来连接）
   EventLoop* ioLoop = threadPool_->getNextLoop();
   char buf[32];
