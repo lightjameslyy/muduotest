@@ -5,6 +5,7 @@ main(): pid = 16204
 20170722 13:42:39.961059Z 16204 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
 //io线程池创建的四个io线程对应的eventloop对象
 //fd=8 这个新对象的pollerfd,fd=9 timerfd,fd=10 wakeupfd，8~19分属四个线程
+//8 9 10      11 12 13      14 15 16      17 18 19
 //每个子线程的事件循环loop.loop()先启动，父进程的最后启动
 20170722 13:42:39.961559Z 16205 TRACE updateChannel fd = 9 events = 3 - EPollPoller.cc:104
 20170722 13:42:39.961645Z 16205 TRACE EventLoop EventLoop created 0xB7415F64 in thread 16205 - EventLoop.cc:62

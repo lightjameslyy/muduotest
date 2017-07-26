@@ -80,14 +80,14 @@ void TcpConnection::connectEstablished()
   channel_->tie(shared_from_this());
   channel_->enableReading();	// TcpConnection所对应的通道加入到Poller关注
 
-  connectionCallback_(shared_from_this());
+  connectionCallback_(shared_from_this());//tcpserver 114行，最终回调用户的onConnection
   LOG_TRACE << "[4] usecount=" << shared_from_this().use_count();
 }
 
 void TcpConnection::connectDestroyed()
 {
   loop_->assertInLoopThread();
-  if (state_ == kConnected)
+  if (state_ == kConnected)//经过void TcpConnection::handleClose()此条件不成立了
   {
     setState(kDisconnected);
     channel_->disableAll();

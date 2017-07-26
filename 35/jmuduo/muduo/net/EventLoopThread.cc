@@ -7,7 +7,7 @@
 // Author: Shuo Chen (chenshuo at chenshuo dot com)
 
 #include <muduo/net/EventLoopThread.h>
-
+#include <muduo/base/Logging.h>
 #include <muduo/net/EventLoop.h>
 
 #include <boost/bind.hpp>
@@ -53,8 +53,9 @@ void EventLoopThread::threadFunc()//子线程
 {
   EventLoop loop;
 
-  if (callback_)
+  if (callback_)//目前没有回调
   {
+	LOG_TRACE<<"thread callback_ had been executed";
     callback_(&loop);
   }
 

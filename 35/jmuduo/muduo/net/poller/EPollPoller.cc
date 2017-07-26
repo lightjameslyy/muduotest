@@ -100,6 +100,7 @@ void EPollPoller::fillActiveChannels(int numEvents,
 
 void EPollPoller::updateChannel(Channel* channel)
 {
+  //LOG_TRACE<<"channel_ disableall()";
   Poller::assertInLoopThread();
   LOG_TRACE << "fd = " << channel->fd() << " events = " << channel->events();
   const int index = channel->index();
@@ -128,7 +129,7 @@ void EPollPoller::updateChannel(Channel* channel)
     assert(channels_.find(fd) != channels_.end());
     assert(channels_[fd] == channel);
     assert(index == kAdded);
-    if (channel->isNoneEvent())
+    if (channel->isNoneEvent())//这里成立的，channel不关注事件了
     {
       update(EPOLL_CTL_DEL, channel);
       channel->set_index(kDeleted);
