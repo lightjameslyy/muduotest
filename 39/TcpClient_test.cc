@@ -24,10 +24,10 @@ class TestClient
         boost::bind(&TestClient::onConnection, this, _1));
     client_.setMessageCallback(
         boost::bind(&TestClient::onMessage, this, _1, _2, _3));
-    //client_.enableRetry();
+    //client_.enableRetry();//连接已经建立，由于某种原因导致断开，能否重连
     // 标准输入缓冲区中有数据的时候，回调TestClient::handleRead
     stdinChannel_.setReadCallback(boost::bind(&TestClient::handleRead, this));
-	stdinChannel_.enableReading();
+	stdinChannel_.enableReading();//关注可读事件
   }
 
   void connect()
@@ -38,13 +38,13 @@ class TestClient
  private:
   void onConnection(const TcpConnectionPtr& conn)
   {
-    if (conn->connected())
+    if (conn->connected())//客户端已经连接完成
     {
       printf("onConnection(): new connection [%s] from %s\n",
              conn->name().c_str(),
              conn->peerAddress().toIpPort().c_str());
     }
-    else
+    else//连接关闭了
     {
       printf("onConnection(): connection [%s] is down\n",
              conn->name().c_str());
@@ -72,7 +72,7 @@ class TestClient
   Channel stdinChannel_;		// 标准输入Channel
 };
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[])//因为有自动重连功能，所以可以客户端先启动
 {
   LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   EventLoop loop;

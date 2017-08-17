@@ -54,7 +54,7 @@ void Connector::startInLoop()
   {
     connect();
   }
-  else
+  else//有可能另一个线程调用stop()
   {
     LOG_DEBUG << "do not connect";
   }
@@ -70,7 +70,7 @@ void Connector::stop()
 void Connector::stopInLoop()
 {
   loop_->assertInLoopThread();
-  if (state_ == kConnecting)
+  if (state_ == kConnecting)//正处于连接状态，还没有连接成功
   {
     setState(kDisconnected);
     int sockfd = removeAndResetChannel();	// 将通道从poller中移除关注，并将channel置空
@@ -134,7 +134,7 @@ void Connector::connecting(int sockfd)
   setState(kConnecting);
   assert(!channel_);
   // Channel与sockfd关联
-  channel_.reset(new Channel(loop_, sockfd));
+  channel_.reset(new Channel(loop_, sockfd));//构造函数没有channel_，这里初始化，并且绑定sockfd
   // 设置可写回调函数，这时候如果socket没有错误，sockfd就处于可写状态
   channel_->setWriteCallback(
       boost::bind(&Connector::handleWrite, this)); // FIXME: unsafe
@@ -144,7 +144,7 @@ void Connector::connecting(int sockfd)
 
   // channel_->tie(shared_from_this()); is not working,
   // as channel_ is not managed by shared_ptr
-  channel_->enableWriting();		// 让Poller关注可写事件
+  channel_->enableWriting();		// 让Poller关注可写事件//一旦连接成功，她就回调handleWrite，处于可写状态
 }
 
 int Connector::removeAndResetChannel()
@@ -170,9 +170,10 @@ void Connector::handleWrite()
 
   if (state_ == kConnecting)
   {
-    int sockfd = removeAndResetChannel();	// 从poller中移除关注，并将channel置空
+    int sockfd = removeAndResetChannel();	// 从poller中移除关注，并将channel置空//连接成功后就没价值了，不需要关注它了
+	//它之前只关注可写事件，如果连接成功后，不断开，一直处于可写状态，水平触发，就会一直处于busyloop
     // socket可写并不意味着连接一定建立成功
-    // 还需要用getsockopt(sockfd, SOL_SOCKET, SO_ERROR, ...)再次确认一下。
+    // 还需要用getsockopt(sockfd, SOL_SOCKET, SO_ERROR, ...)再次确认一下(有没有发生错误)。
     int err = sockets::getSocketError(sockfd);
     if (err)		// 有错误
     {

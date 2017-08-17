@@ -87,6 +87,7 @@ TcpClient::~TcpClient()
     // FIXME: not 100% safe, if we are in different thread
 
 	// 重新设置TcpConnection中的closeCallback_为detail::removeConnection
+	//因为tcpClient::removeConnection具有重连功能
     CloseCallback cb = boost::bind(&detail::removeConnection, loop_, _1);
     loop_->runInLoop(
         boost::bind(&TcpConnection::setCloseCallback, conn, cb));
@@ -123,7 +124,7 @@ void TcpClient::disconnect()
   }
 }
 
-// 停止connector_
+// 停止connector_//connector_可能正处于发起连接的状态（尚未建立成功）
 void TcpClient::stop()
 {
   connect_ = false;

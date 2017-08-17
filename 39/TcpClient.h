@@ -74,7 +74,7 @@ class TcpClient : boost::noncopyable
   ConnectionCallback connectionCallback_;		// 连接建立回调函数
   MessageCallback messageCallback_;				// 消息到来回调函数
   WriteCompleteCallback writeCompleteCallback_;	// 数据发送完毕回调函数
-  bool retry_;   // 重连，是指连接建立之后又断开的时候是否重连
+  bool retry_;   // 重连，是指连接建立之后又（意外）断开的时候是否重连(connector_的重连是指连接还没成功，是否自动重连)
   bool connect_; // atomic
   // always in loop thread
   int nextConnId_;			// name_ + nextConnId_用于标识一个连接
