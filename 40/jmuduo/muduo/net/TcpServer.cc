@@ -102,7 +102,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
                                           localAddr,
                                           peerAddr));*/
 
-  TcpConnectionPtr conn(new TcpConnection(ioLoop,
+  TcpConnectionPtr conn(new TcpConnection(ioLoop,/*分配一个eventloop*/
                                           connName,
                                           sockfd,
                                           localAddr,
@@ -169,7 +169,4 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
   //loop_->queueInLoop(
   //    boost::bind(&TcpConnection::connectDestroyed, conn));
   LOG_TRACE << "[10] usecount=" << conn.use_count();
-
-
-  
 }

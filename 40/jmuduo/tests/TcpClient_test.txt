@@ -1,0 +1,80 @@
+//客户端先启动，客户端连接不上，会隔一个时间段继续连接
+//events=3 read events=4 write
+//fd=3 pollerfd    fd=4 timerfd    fd=5 wakeupfd     fd=6 acceptfd    fd=7 idlefd
+main(): pid = 16204
+20170722 13:42:39.960217Z 16204 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170722 13:42:39.961059Z 16204 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+////io线程池创建的四个io线程对应的eventloop对象
+////fd=8 这个新对象的pollerfd,    fd=9 timerfd,    fd=10 wakeupfd，8~19分属四个线程
+////8 9 10      11 12 13      14 15 16      17 18 19
+////每个子线程的事件循环loop.loop()先启动，父进程的最后启动
+//fd=6这里是connector
+
+20170817 04:52:38.751040Z  3022 TRACE IgnoreSigPipe Ignore SIGPIPE - EventLoop.cc:51
+20170817 04:52:38.751664Z  3022 INFO  pid = 3022, tid = 3022 - TcpClient_test.cc:77
+20170817 04:52:38.752009Z  3022 TRACE updateChannel fd = 4 events = 3 - EPollPoller.cc:104
+20170817 04:52:38.752694Z  3022 TRACE EventLoop EventLoop created 0xBFB7B8C0 in thread 3022 - EventLoop.cc:76
+20170817 04:52:38.753118Z  3022 TRACE updateChannel fd = 5 events = 3 - EPollPoller.cc:104
+20170817 04:52:38.753677Z  3022 DEBUG Connector ctor[0x9E55360] - Connector.cc:33
+20170817 04:52:38.753994Z  3022 INFO  TcpClient::TcpClient[TestClient] - connector 0x9E55360 - TcpClient.cc:72
+20170817 04:52:38.754713Z  3022 TRACE updateChannel fd = 0 events = 3 - EPollPoller.cc:104
+20170817 04:52:38.755038Z  3022 INFO  TcpClient::connect[TestClient] - connecting to 127.0.0.1:8888 - TcpClient.cc:106
+20170817 04:52:38.756662Z  3022 TRACE updateChannel fd = 6 events = 4 - EPollPoller.cc:104
+
+20170817 04:52:38.757179Z  3022 TRACE loop EventLoop 0xBFB7B8C0 start looping - EventLoop.cc:108
+20170817 04:52:38.757735Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65//文件描述符6可写了
+20170817 04:52:38.758187Z  3022 TRACE printActiveChannels {6: OUT HUP ERR }  - EventLoop.cc:271
+20170817 04:52:38.758749Z  3022 WARN  Channel::handle_event() POLLHUP - Channel.cc:95
+20170817 04:52:38.758787Z  3022 ERROR Connector::handleError - Connector.cc:210
+20170817 04:52:38.758811Z  3022 TRACE updateChannel fd = 6 events = 0 - EPollPoller.cc:104
+20170817 04:52:38.759025Z  3022 TRACE removeChannel fd = 6 - EPollPoller.cc:147
+20170817 04:52:38.759064Z  3022 TRACE handleError SO_ERROR = 111 Connection refused - Connector.cc:215
+
+20170817 04:52:38.759099Z  3022 INFO  Connector::retry - Retry connecting to 127.0.0.1:8888 in 500 milliseconds.  - Connector.cc:226
+20170817 04:52:38.759130Z  3022 TRACE handleWrite Connector::handleWrite 0 - Connector.cc:169
+20170817 04:52:39.259420Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65
+20170817 04:52:39.259501Z  3022 TRACE printActiveChannels {4: IN }  - EventLoop.cc:271
+20170817 04:52:39.259527Z  3022 TRACE readTimerfd TimerQueue::handleRead() 1 at 1502945559.259516 - TimerQueue.cc:62
+20170817 04:52:39.259622Z  3022 TRACE updateChannel fd = 6 events = 4 - EPollPoller.cc:104
+20170817 04:52:39.259663Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65
+20170817 04:52:39.259683Z  3022 TRACE printActiveChannels {6: OUT HUP ERR }  - EventLoop.cc:271
+20170817 04:52:39.259695Z  3022 WARN  Channel::handle_event() POLLHUP - Channel.cc:95
+20170817 04:52:39.259705Z  3022 ERROR Connector::handleError - Connector.cc:210
+20170817 04:52:39.259714Z  3022 TRACE updateChannel fd = 6 events = 0 - EPollPoller.cc:104
+20170817 04:52:39.259726Z  3022 TRACE removeChannel fd = 6 - EPollPoller.cc:147
+20170817 04:52:39.259746Z  3022 TRACE handleError SO_ERROR = 111 Connection refused - Connector.cc:215
+
+20170817 04:52:39.259775Z  3022 INFO  Connector::retry - Retry connecting to 127.0.0.1:8888 in 1000 milliseconds.  - Connector.cc:226
+20170817 04:52:39.259800Z  3022 TRACE handleWrite Connector::handleWrite 0 - Connector.cc:169
+20170817 04:52:40.260591Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65
+20170817 04:52:40.260714Z  3022 TRACE printActiveChannels {4: IN }  - EventLoop.cc:271
+20170817 04:52:40.260736Z  3022 TRACE readTimerfd TimerQueue::handleRead() 1 at 1502945560.260731 - TimerQueue.cc:62
+20170817 04:52:40.260829Z  3022 TRACE updateChannel fd = 6 events = 4 - EPollPoller.cc:104
+20170817 04:52:40.260858Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65
+20170817 04:52:40.260877Z  3022 TRACE printActiveChannels {6: OUT HUP ERR }  - EventLoop.cc:271
+20170817 04:52:40.260888Z  3022 WARN  Channel::handle_event() POLLHUP - Channel.cc:95
+20170817 04:52:40.260898Z  3022 ERROR Connector::handleError - Connector.cc:210
+20170817 04:52:40.260907Z  3022 TRACE updateChannel fd = 6 events = 0 - EPollPoller.cc:104
+20170817 04:52:40.260919Z  3022 TRACE removeChannel fd = 6 - EPollPoller.cc:147
+20170817 04:52:40.260939Z  3022 TRACE handleError SO_ERROR = 111 Connection refused - Connector.cc:215
+
+
+
+20170817 04:54:10.269168Z  3022 TRACE handleWrite Connector::handleWrite 0 - Connector.cc:169
+20170817 04:54:20.280815Z  3022 TRACE poll  nothing happended - EPollPoller.cc:74
+20170817 04:54:30.291779Z  3022 TRACE poll  nothing happended - EPollPoller.cc:74
+20170817 04:54:40.269504Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65
+20170817 04:54:40.269584Z  3022 TRACE printActiveChannels {4: IN }  - EventLoop.cc:271
+20170817 04:54:40.269606Z  3022 TRACE readTimerfd TimerQueue::handleRead() 1 at 1502945680.269600 - TimerQueue.cc:62
+20170817 04:54:40.269751Z  3022 TRACE updateChannel fd = 6 events = 4 - EPollPoller.cc:104
+20170817 04:54:40.270543Z  3022 TRACE poll 1 events happended - EPollPoller.cc:65
+20170817 04:54:40.270569Z  3022 TRACE printActiveChannels {6: OUT }  - EventLoop.cc:271
+20170817 04:54:40.270583Z  3022 TRACE handleWrite Connector::handleWrite 1 - Connector.cc:169
+20170817 04:54:40.270593Z  3022 TRACE updateChannel fd = 6 events = 0 - EPollPoller.cc:104
+20170817 04:54:40.270606Z  3022 TRACE removeChannel fd = 6 - EPollPoller.cc:147
+20170817 04:54:40.270727Z  3022 DEBUG TcpConnection TcpConnection::ctor[TestClient:127.0.0.1:8888#1] at 0x9E55528 fd=6 - TcpConnection.cc:65
+20170817 04:54:40.270755Z  3022 TRACE connectEstablished [3] usecount=3 - TcpConnection.cc:238
+20170817 04:54:40.270768Z  3022 TRACE updateChannel fd = 6 events = 3 - EPollPoller.cc:104
+onConnection(): new connection [TestClient:127.0.0.1:8888#1] from 127.0.0.1:8888
+20170817 04:54:40.270797Z  3022 TRACE connectEstablished [4] usecount=3 - TcpConnection.cc:243
+20170817 04:54:50.281909Z  3022 TRACE poll  nothing happended - EPollPoller.cc:74

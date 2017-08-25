@@ -36,7 +36,7 @@ class EventLoopThreadPool : boost::noncopyable
   EventLoopThreadPool(EventLoop* baseLoop);
   ~EventLoopThreadPool();
   void setThreadNum(int numThreads) { numThreads_ = numThreads; }
-  void start(const ThreadInitCallback& cb = ThreadInitCallback());
+  void start(const ThreadInitCallback& cb = ThreadInitCallback());//const
   EventLoop* getNextLoop();
 
  private:

@@ -104,7 +104,7 @@ class TcpServer : boost::noncopyable
   ThreadInitCallback threadInitCallback_;	// IO线程池中的线程在进入事件循环前，会回调用此函数
   bool started_;
   // always in loop thread
-  int nextConnId_;				// 下一个连接ID
+  int nextConnId_;				// 下一个连接ID(客户端来的连接）
   ConnectionMap connections_;	// 连接列表
 };
 

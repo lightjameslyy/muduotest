@@ -36,7 +36,7 @@ EventLoopThread::~EventLoopThread()
 EventLoop* EventLoopThread::startLoop()
 {
   assert(!thread_.started());
-  thread_.start();
+  thread_.start();//执行下面的threadFunc()函数
 
   {
     MutexLockGuard lock(mutex_);

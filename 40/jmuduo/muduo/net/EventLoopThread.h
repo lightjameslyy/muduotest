@@ -29,7 +29,7 @@ class EventLoopThread : boost::noncopyable
  public:
   typedef boost::function<void(EventLoop*)> ThreadInitCallback;
 
-  EventLoopThread(const ThreadInitCallback& cb = ThreadInitCallback());
+  EventLoopThread(const ThreadInitCallback& cb = ThreadInitCallback());//参数
   ~EventLoopThread();
   EventLoop* startLoop();	// 启动线程，该线程就成为了IO线程
 
